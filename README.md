@@ -1,0 +1,1 @@
+# MERN Authentication Boilerplate code.
