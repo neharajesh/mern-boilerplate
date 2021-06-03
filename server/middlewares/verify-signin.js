@@ -9,10 +9,11 @@ const verifyToken = (req, res, next) => {
         if(!token) {
             return res.status(403).json({success: false, message: "no token provided"})
         }
-        jwt.verify(token, secret, () => {
-            req.userId = decoded.id;
-            next()
-        })
+        let decoded = jwt.verify(token, secret)
+        if(!decoded) {
+            throw new Error()
+        }
+        next()
     } catch (err) {
         res.status(400).json({success: false, message: "error occured while verifying token"})
     }
